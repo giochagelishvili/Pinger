@@ -1,25 +1,6 @@
-﻿using System.Net.NetworkInformation;
-using System.Text;
+﻿using Pinger;
 
 // Pinging Google DNS Server - 4.2.2.2
 
-Ping pingSender = new Ping();
-PingOptions options = new PingOptions();
-
-options.DontFragment = true;
-
-string data = "I'm trying to learn .NET";
-byte[] buffer = Encoding.ASCII.GetBytes(data);
-
-int timeout = 120;
-string address = "4.2.2.2";
-
-PingReply reply = pingSender.Send(address, timeout, buffer, options);
-
-if (reply.Status == IPStatus.Success)
-{
-    Console.WriteLine("Response: {0}", reply.Status.ToString());
-    Console.WriteLine("RountTrip: {0}", reply.RoundtripTime);
-    Console.WriteLine("Time to live: {0}", reply.Options.Ttl);
-    Console.WriteLine("Buffer size: {0}", reply.Buffer.Length);
-}
+PingService pingService = new PingService();
+pingService.SendPing();
